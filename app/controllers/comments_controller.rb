@@ -8,20 +8,29 @@ class CommentsController < ApplicationController
         @comment.user = current_user
 
         if @comment.save
-            flash[:notice] = "Comment created successfully."
-            redirect_to post_path(@post)
-        else
-            flash[:alert] = "Comment could not be created."
-            redirect_to post_path(@post)
+            redirect_to post_path(@post), notice: 'Comment has been created'
+          else
+            redirect_to post_path(@post), alert: 'Comment has not been created'
+          end
         end
-        
-
-    end
+       
 
     def destroy
         @comment = @post.comments.find(params[:id])
         @comment.destroy
         redirect_to post_path(@post)
+    end
+
+    def update
+        @comment = @post.comments.find(params[:id])
+        
+        respond_to do |format|
+            if @comment.update(comment_params)
+                format.html { redirect_to post_url(@post), notice: 'Comment updated successfully.' }
+            else
+                format.html { redirect_to post_url(@post), alert: 'Comment was not updated.' }
+            end
+        end
     end
 
     private
