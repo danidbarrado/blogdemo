@@ -10,11 +10,10 @@ export default class extends Controller {
     const formID = event.params["form"];
     const commentBodyID = event.params["body"];
     const editButtonID = event.params["edit"];
-    
+
     const form = document.getElementById(formID);
     const commentBody = document.getElementById(commentBodyID);
     const editButton = document.getElementById(editButtonID);
-
 
     form.classList.toggle("d-none");
     form.classList.toggle("mt-5");
@@ -30,11 +29,10 @@ export default class extends Controller {
       editButton.innerText = "Edit";
       this.toggleEditButtonClass(editButton);
     }
-}
+  }
 
-toggleEditButtonClass(editButton) {
-  editButton.classList.toggle("btn-secondary");
-  editButton.classList.toggle("btn-warning");
-}
-
+  toggleEditButtonClass(editButton) {
+    editButton.classList.toggle("btn-secondary");
+    editButton.classList.toggle("btn-warning");
+  }
 }
